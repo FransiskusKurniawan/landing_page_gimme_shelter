@@ -1,0 +1,45 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # API Configuration
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-https://api.example.com}
+        - NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL:-https://api.example.com/api/v1}
+        - NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL:-https://api.example.com/api/v1}
+        
+        # Feature Flags
+        - NEXT_PUBLIC_DEBUG_MODE=${NEXT_PUBLIC_DEBUG_MODE:-true}
+        - NEXT_PUBLIC_ENABLE_EXPORT=${NEXT_PUBLIC_ENABLE_EXPORT:-true}
+        
+        # Custom Environment Variables
+        - CUSTOM_KEY=${CUSTOM_KEY}
+        
+        # Node Environment
+        - NODE_ENV=production
+    container_name: frontend-app
+    ports:
+      - "3000:3000"
+    environment:
+      # API Configuration
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-https://api.example.com}
+      - NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL:-https://api.example.com/api/v1}
+      - NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL:-https://api.example.com/api/v1}
+      
+      # Feature Flags
+      - NEXT_PUBLIC_DEBUG_MODE=${NEXT_PUBLIC_DEBUG_MODE:-true}
+      - NEXT_PUBLIC_ENABLE_EXPORT=${NEXT_PUBLIC_ENABLE_EXPORT:-true}
+      
+      # Custom Environment Variables
+      - CUSTOM_KEY=${CUSTOM_KEY}
+      
+      # Node Environment
+      - NODE_ENV=production
+    restart: unless-stopped
+    networks:
+      - frontend-network
+
+networks:
+  frontend-network:
+    driver: bridge

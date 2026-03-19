@@ -1,0 +1,142 @@
+{
+    "common": {
+        "language": {
+            "toggle": "Ubah Bahasa",
+            "english": "Inggris",
+            "indonesian": "Bahasa Indonesia"
+        },
+        "theme": {
+            "toggle": "Ganti Tema",
+            "light": "Terang",
+            "dark": "Gelap",
+            "system": "Sistem"
+        }
+    },
+    "landing": {
+        "navbar": {
+            "home": "Beranda",
+            "features": "Fitur",
+            "menu": "Menu",
+            "contact": "Kontak",
+            "sign_in": "Masuk",
+            "get_started": "Mulai Sekarang",
+            "language": "Bahasa",
+            "theme": "Tema"
+        },
+        "hero": {
+            "content1": {
+                "title": "ROCK X ROLL BAR",
+                "subtitle": "Skate Spot + Kitchen",
+                "description": "Buka Setiap Hari | 17:00 - Selesai",
+                "cta": "Mulai Sekarang"
+            },
+            "content2": {
+                "title": "The Skate Spot",
+                "subtitle": "Shred All Day",
+                "description": "Bowl halaman belakang kami terbuka untuk siapa saja. Ambil papanmu dan bergabunglah."
+            },
+            "content3": {
+                "title": "Rock N' Roll Kitchen",
+                "description": "Bir dingin, makanan hangat, dan vibrasi rock n' roll terbaik."
+            }
+        },
+        "features": {
+            "title": "Layanan Kami",
+            "description": "Segala yang Anda butuhkan untuk pengalaman bar yang sempurna.",
+            "items": {
+                "digital_menu": {
+                    "title": "Menu digital online",
+                    "description": "Pindai dan telusuri menu kami dari ponsel Anda."
+                },
+                "reservation": {
+                    "title": "Reservasi meja",
+                    "description": "Pesan meja Anda lebih awal untuk tempat terbaik."
+                },
+                "location_info": {
+                    "title": "Informasi lokasi & jam buka",
+                    "description": "Temukan lokasi tepat kami dan lihat kapan kami buka."
+                },
+                "google_visibility": {
+                    "title": "Visibilitas Google",
+                    "description": "Membantu Anda menemukan kami dengan mudah di Google Maps."
+                }
+            }
+        },
+        "partners": {
+            "title": "Merchandise Kami",
+            "description": "Dapatkan perlengkapan bar eksklusif, papan skate, dan pakaian kami."
+        },
+        "testimonials": {
+            "title": "Cerita Pelanggan",
+            "description": "Apa kata para reguler tentang shelter kami.",
+            "items": {
+                "jack": {
+                    "text": "Vibrasi terbaik. Akustik luar biasa untuk gig dan bir dingin tepat untuk melepas lelah setelah manggung.",
+                    "name": "Jack 'Thunder' Miller",
+                    "position": "Vokalis"
+                },
+                "sarah": {
+                    "text": "Bowl di sini luar biasa. Tempat skate terbaik di pulau ini diikuti oleh burger dan minuman yang mantap.",
+                    "name": "Sarah 'Goofy' Wijaya",
+                    "position": "Skater Pro"
+                },
+                "budi": {
+                    "text": "Tempat favorit saya setiap akhir pekan. Musiknya selalu pas dan dapurnya tidak pernah mengecewakan.",
+                    "name": "Budi Rocker",
+                    "position": "Direktur Kreatif"
+                }
+            }
+        },
+        "contact": {
+            "title": "Kunjungi Kami",
+            "description": "Rumah bagi rock n' roll dan getaran positif.",
+            "info_title": "Detail Kontak",
+            "address_label": "Alamat",
+            "address": "Munggu, Kec. Mengwi, Kabupaten Badung, Bali 80351",
+            "phone": "xxxxxx",
+            "email": "@gimme_shelter_bali",
+            "consultation_title": "Ikuti Kami",
+            "consultation_description": "Ikuti Instagram kami untuk acara terbaru, gig, dan sesi skate.",
+            "form": {
+                "title": "Kirim Pesan",
+                "name_label": "Nama Lengkap",
+                "name_placeholder": "Masukkan nama Anda",
+                "company_label": "Subjek",
+                "company_placeholder": "Apa yang ingin Anda sampaikan?",
+                "email_label": "Email",
+                "email_placeholder": "nama@email.com",
+                "message_label": "Pesan",
+                "message_placeholder": "Ceritakan lebih lanjut...",
+                "submit": "Kirim Pesan",
+                "submitting": "Mengirim...",
+                "success_title": "Pesan Terkirim!",
+                "success_message": "Terima kasih atas pesan Anda. Tim kami akan segera menghubungi Anda."
+            }
+        },
+        "footer": {
+            "tagline": "ROCK X ROLL BAR | Skate Spot + Kitchen",
+            "products_title": "Pengalaman",
+            "company_title": "Gimme Shelter",
+            "support_title": "Info",
+            "products": {
+                "soil_sensors": "Menu Digital",
+                "weather_stations": "Reservasi",
+                "irrigation_control": "Skate Spot",
+                "mobile_app": "Kitchen"
+            },
+            "company": {
+                "about_us": "Tentang Kami",
+                "careers": "Acara",
+                "blog": "Galeri",
+                "contact": "Kontak"
+            },
+            "support": {
+                "help_center": "Bantuan",
+                "documentation": "Info",
+                "privacy_policy": "Privasi",
+                "terms_of_service": "Ketentuan"
+            },
+            "copyright": "© {year} Gimme Shelter. Semua hak dilindungi."
+        }
+    }
+}

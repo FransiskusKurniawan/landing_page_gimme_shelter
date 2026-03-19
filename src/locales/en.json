@@ -1,0 +1,142 @@
+{
+    "common": {
+        "language": {
+            "toggle": "Toggle Language",
+            "english": "English",
+            "indonesian": "Indonesian"
+        },
+        "theme": {
+            "toggle": "Toggle Theme",
+            "light": "Light",
+            "dark": "Dark",
+            "system": "System"
+        }
+    },
+    "landing": {
+        "navbar": {
+            "home": "Home",
+            "features": "Features",
+            "menu": "Menu",
+            "contact": "Contact",
+            "sign_in": "Sign In",
+            "get_started": "Get Started",
+            "language": "Language",
+            "theme": "Theme"
+        },
+        "hero": {
+            "content1": {
+                "title": "ROCK X ROLL BAR",
+                "subtitle": "Skate Spot + Kitchen",
+                "description": "Open Everyday | 5pm - Late",
+                "cta": "Get Started"
+            },
+            "content2": {
+                "title": "The Skate Spot",
+                "subtitle": "Shred All Day",
+                "description": "Our backyard bowl is open for everyone. Grab your board and join the session."
+            },
+            "content3": {
+                "title": "Rock N' Roll Kitchen",
+                "description": "Cold beers, hot food, and the best rock n' roll vibrations."
+            }
+        },
+        "features": {
+            "title": "Our Services",
+            "description": "Everything you need for the perfect bar experience.",
+            "items": {
+                "digital_menu": {
+                    "title": "Online Digital Menu",
+                    "description": "Scan and browse our menu from your phone."
+                },
+                "reservation": {
+                    "title": "Table Reservation",
+                    "description": "Book your table in advance for the best spot."
+                },
+                "location_info": {
+                    "title": "Location & Hours",
+                    "description": "Find our exact spot and see when we're open."
+                },
+                "google_visibility": {
+                    "title": "Google Visibility",
+                    "description": "Helping you find us easily on Google Maps."
+                }
+            }
+        },
+        "partners": {
+            "title": "Our Merchandise",
+            "description": "Get our exclusive bar gear, skate decks, and apparel."
+        },
+        "testimonials": {
+            "title": "Patron Stories",
+            "description": "What the regulars say about the shelter.",
+            "items": {
+                "jack": {
+                    "text": "The best vibes. Great acoustics for the gigs and the cold beers are just what we need after a set.",
+                    "name": "Jack 'Thunder' Miller",
+                    "position": "Vocalist"
+                },
+                "sarah": {
+                    "text": "The bowl here is insane. Best skate spot on the island followed by amazing burgers and drinks.",
+                    "name": "Sarah 'Goofy' Wijaya",
+                    "position": "Pro Skater"
+                },
+                "budi": {
+                    "text": "My go-to place every weekend. The music is always on point and the kitchen never disappoints.",
+                    "name": "Budi Rocker",
+                    "position": "Creative Director"
+                }
+            }
+        },
+        "contact": {
+            "title": "Visit Us",
+            "description": "The home of rock n' roll and good vibes.",
+            "info_title": "Contact Details",
+            "address_label": "Address",
+            "address": "Munggu, Kec. Mengwi, Kabupaten Badung, Bali 80351",
+            "phone": "xxxxxx",
+            "email": "@gimme_shelter_bali",
+            "consultation_title": "Follow Us",
+            "consultation_description": "Follow our Instagram for the latest events, gigs, and skate sessions.",
+            "form": {
+                "title": "Send a Message",
+                "name_label": "Full Name",
+                "name_placeholder": "Enter your name",
+                "company_label": "Subject",
+                "company_placeholder": "What's on your mind?",
+                "email_label": "Email",
+                "email_placeholder": "name@email.com",
+                "message_label": "Message",
+                "message_placeholder": "Tell us more...",
+                "submit": "Send Message",
+                "submitting": "Sending...",
+                "success_title": "Message Sent!",
+                "success_message": "Thank you for your message. Our team will contact you soon."
+            }
+        },
+        "footer": {
+            "tagline": "ROCK X ROLL BAR | Skate Spot + Kitchen",
+            "products_title": "Experience",
+            "company_title": "Gimme Shelter",
+            "support_title": "Info",
+            "products": {
+                "soil_sensors": "Digital Menu",
+                "weather_stations": "Reservations",
+                "irrigation_control": "Skate Spot",
+                "mobile_app": "Kitchen"
+            },
+            "company": {
+                "about_us": "About Us",
+                "careers": "Events",
+                "blog": "Gallery",
+                "contact": "Contact"
+            },
+            "support": {
+                "help_center": "Help",
+                "documentation": "Info",
+                "privacy_policy": "Privacy",
+                "terms_of_service": "Terms"
+            },
+            "copyright": "© {year} Gimme Shelter. All rights reserved."
+        }
+    }
+}

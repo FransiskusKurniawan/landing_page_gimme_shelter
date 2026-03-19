@@ -1,0 +1,145 @@
+name: Deploy Frontend to VPS
+
+on:
+  push:
+    branches: [ main, master, production, deploy ]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Enable Corepack and activate pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@8 --activate
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Build Next.js app
+        run: pnpm run build
+        env:
+          NODE_ENV: production
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
+          NEXT_PUBLIC_API_BASE_URL: ${{ secrets.NEXT_PUBLIC_API_BASE_URL }}
+          NEXT_PUBLIC_DEBUG_MODE: ${{ secrets.NEXT_PUBLIC_DEBUG_MODE }}
+          NEXT_PUBLIC_ENABLE_EXPORT: ${{ secrets.NEXT_PUBLIC_ENABLE_EXPORT }}
+          CUSTOM_KEY: ${{ secrets.CUSTOM_KEY }}
+
+      - name: Prepare deployment files
+        run: |
+          mkdir -p deploy
+          # Copy Next.js standalone output (much smaller!)
+          cp -r .next/standalone/. deploy/
+          # Copy static files
+          cp -r .next/static deploy/.next/static
+          cp -r public deploy/public
+          # Create minimal Dockerfile
+          cat > deploy/Dockerfile <<'EOF'
+          FROM node:20-alpine
+          WORKDIR /app
+          # Copy pre-built standalone output
+          COPY . .
+          EXPOSE 3000
+          ENV NODE_ENV=production
+          ENV PORT=3000
+          ENV HOSTNAME="0.0.0.0"
+          # Standalone output includes server.js
+          CMD ["node", "server.js"]
+          EOF
+          # Create docker-compose.yml
+          cat > deploy/docker-compose.yml <<'EOF'
+          services:
+            frontend:
+              build: .
+              container_name: frontend-app
+              ports:
+                - "3000:3000"
+              restart: unless-stopped
+              environment:
+                - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+                - NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
+                - NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}
+                - NEXT_PUBLIC_DEBUG_MODE=${NEXT_PUBLIC_DEBUG_MODE}
+                - NEXT_PUBLIC_ENABLE_EXPORT=${NEXT_PUBLIC_ENABLE_EXPORT}
+                - CUSTOM_KEY=${CUSTOM_KEY}
+                - NODE_ENV=production
+              networks:
+                - frontend-network
+          
+          networks:
+            frontend-network:
+              driver: bridge
+          EOF
+
+      - name: Stop existing containers on VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: root
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            # Stop existing containers if running
+            if [ -d "${{ secrets.FRONTEND_PROJECT_DIR }}" ]; then
+              cd ${{ secrets.FRONTEND_PROJECT_DIR }}
+              docker compose down || true
+            fi
+
+      - name: Copy build artifacts to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: root
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: "deploy/*"
+          target: "${{ secrets.FRONTEND_PROJECT_DIR }}"
+          strip_components: 1
+          rm: true
+
+      - name: Start containers on VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: root
+          key: ${{ secrets.VPS_SSH_KEY }}
+          command_timeout: 10m
+          envs: NEXT_PUBLIC_API_URL,NEXT_PUBLIC_BASE_URL,NEXT_PUBLIC_API_BASE_URL,NEXT_PUBLIC_DEBUG_MODE,NEXT_PUBLIC_ENABLE_EXPORT,CUSTOM_KEY
+          script: |
+            cd ${{ secrets.FRONTEND_PROJECT_DIR }}
+            # Write runtime env file for compose
+            cat > .env <<EOF
+            NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+            NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
+            NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}
+            NEXT_PUBLIC_DEBUG_MODE=${NEXT_PUBLIC_DEBUG_MODE}
+            NEXT_PUBLIC_ENABLE_EXPORT=${NEXT_PUBLIC_ENABLE_EXPORT}
+            CUSTOM_KEY=${CUSTOM_KEY}
+            NODE_ENV=production
+            EOF
+            # Build new image (just copy files)
+            docker compose build --no-cache
+            # Start container
+            docker compose up -d
+            # Smoke test via host-mapped port
+            curl -fsSL http://localhost:3000/ > /dev/null && echo "Smoke test OK" || echo "Smoke test failed"
+            # Clean up old images
+            docker image prune -af
